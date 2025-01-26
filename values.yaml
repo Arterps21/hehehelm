@@ -1,0 +1,44 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: "1.21"
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  create: true
+  automount: true
+  name: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "100m"
+  limits:
+    memory: "128Mi"
+    cpu: "150m"
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+extraEnv: []
+extraVolumes: []
+extraVolumeMounts: []
+
+annotations: {}
+labels: {}
+
